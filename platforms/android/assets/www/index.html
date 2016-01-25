@@ -163,7 +163,7 @@ var search_str = "";
 		$('#search').keyup(function(){
 			search_str = $('#search').val();
 			//alert(search_str);
-			var ajaxurl = 'http://www.toursvision.com/bootstrap/getImage.php',
+			var ajaxurl = 'http://nowasys.com/photosanywhere/getImage.php',
 			data = {'action': 'getImagesSearch', 'search': search_str};
 			$.post(ajaxurl, data).success(function (resp) {
 				//alert(resp);
@@ -196,7 +196,7 @@ var search_str = "";
   function getCategories(categ){
 		//alert("category = " + categ);
 		var category =  categ; 
-			var ajaxurl = 'http://www.toursvision.com/bootstrap/getImage.php',
+			var ajaxurl = 'http://nowasys.com/photosanywhere/getImage.php',
 			data = {'action': 'catImagesSearch', 'category': category};
 			$.post(ajaxurl, data).success(function (resp) {
 				//alert("category response = " + resp);
@@ -232,7 +232,7 @@ var json;
 var TabNumb = 1;
 function getImage() {
 	//alert('in function');
-	var ajaxurl = 'http://www.toursvision.com/bootstrap/getImage.php',
+	var ajaxurl = 'http://nowasys.com/photosanywhere/getImage.php',
 	data = {'action': 'getImages'};
 	$.ajax({
     type: "POST",
@@ -270,7 +270,7 @@ function getImage() {
 
 function getCat() {
 	//alert('in function');
-	var ajaxurl = 'http://www.toursvision.com/bootstrap/getImage.php',
+	var ajaxurl = 'http://nowasys.com/photosanywhere/getImage.php',
 	data = {'action': 'getCat'};
 	$.ajax({
     type: "POST",
