@@ -1,0 +1,8 @@
+changes in photos anywhere:
+
+1: activate refresh button
+2: share with facebook
+3: In "Today" display cards
+4: Login/ login with facebook
+5: RSS feeds intigration with other websites
+6: UI improvement

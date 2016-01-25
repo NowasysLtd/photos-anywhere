@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+		<!--<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval';">-->
+        <link href="css/materialize.min.css" rel="stylesheet" />
+		<link href="css/lightGallery.css" rel="stylesheet" />
+		<link href="css/sweetalert.css" rel="stylesheet" />
+		<link href="css/customStyles.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/jquery.jsonp-2.1.4.min.js"></script>
+		<script src="js/modernizr.js"></script>
+		<script>
+			$(window).load(function() {
+				$(".se-pre-con").fadeOut("slow");
+			});
+		</script>
+        <title>Photos Anywhere</title>
+    </head>
+<body>
+	<div class="se-pre-con"></div>
+	<nav>
+    	<div id="slide-out" class="side-nav">
+			<div class="sideNavTop">
+				<div class="sideTop">
+					<div class="navImage"><img src="img/logo.png" alt="Logo" /></div>
+					<div class="appName"><p>Photos Anywhere</p></div>
+				</div>
+				<div class="sideBottom">General</div>
+			</div>
+			<ul class="tabs" id="menuTab1">
+				<li class="tab col s3"><a href="#test1" class="menuTab active"><span class="icon-home"></span>Live Images</a></li>
+				<li class="tab col s3"><a class="menuTab" href="#test2"><span class="icon-search"></span>Search</a></li>
+				<li class="tab col s3" id="fav"><a href="#test3" class="menuTab"><span class="icon-star-full"></span>Faourite</a></li>
+			</ul>
+        </div>
+        <a href="#" data-activates="slide-out" class="button-collapse"><img src="img/drawer2.png" alt="Menu" /></a>
+        <div class="navCenter">Photos Anywhere</div>
+        <div class="navRight">
+        	<a href="#"><img src="img/refresh.png" alt="Refresh" /></a>
+        </div>
+	</nav>
+      <div class="row">
+        <div id="test1" class="col s12">
+            <div class="row" id="serverImages">
+            	<!--<ul class="gallery" id="light-gallery">-->
+				<div id="secTab">
+					<ul id="tabMenu">
+						<li class="tabActive"><a id="anh1">All</a></li>
+					</ul>
+				</div>
+				<ul class="gallery" id="light-gallery">
+				</ul>
+            </div>        
+        </div>
+        <div id="test2" class="col s12">
+        	<div class="row mb0">
+            	<form class="col s12">
+                	<div class="row mb0">
+                    	<div class="input-field col s12">
+                        	<input placeholder="Search" id="search" type="text" class="validate">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+            	<ul class="gallery" id="searchImages">
+                </ul>
+            </div>
+        </div>
+        <div id="test3" class="col s12">
+			<div class="row">
+				<ul class="gallery" id="favImages">
+				</ul>
+			</div>
+		</div>
+      </div>   
+<script type="text/javascript" src="cordova.js"></script>
+<script src="js/materialize.js"></script>
+<script>
+// to download image from app to device
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady(){
+	var url = "http://www.phonegaptutorial.com/wp-content/uploads/examples/phonegap-logo.png";
+	window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function (dataEntry) {
+		dataEntry.getDirectory("photos_anywhere", {create: true });
+	});
+}
+
+// to display images from device
+$('#fav').click(function(){
+	var path = cordova.file.externalRootDirectory + "photos_anywhere";
+	//alert(path);
+	window.resolveLocalFileSystemURL(path , function (dataEntry) {
+		var directoryReader = dataEntry.createReader();
+		directoryReader.readEntries(function(entries) {
+			//alert(entries.length);
+			var output = "";
+			for ( var i = 0; i < entries.length; ++i) {
+			var img_path = entries[i].toURL();
+				//alert(img_path);
+			//var fileNameIndex = img_path.lastIndexOf("/") + 1;
+			//var filename = img_path.substr(fileNameIndex);
+			//alert(filename);
+				output += '<li class="col s6 m4 l3" data-src="'+img_path+'"><a href="#"><img src="'+img_path+'" /></a></li>' ;
+			}
+			$('#favImages').html(output);
+			$("#favImages").lightGallery();
+		}, function(error) { // error get files and folders
+		alert(error.code);
+		});
+	});
+
+});
+</script>
+
+<script src="js/lightGallery.js"></script>
+<script src="js/sweetalert.min.js"></script>
+<script>
+var search_str = "";
+  $(document).ready(function(){
+	  // sets side nav width to 300 and make it appear from left
+	  $('.button-collapse').sideNav({
+      menuWidth: 300, // Default is 240
+      edge: 'left', // Choose the horizontal origin
+      closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+		});
+		
+		//hide side nav when clicked on it
+	  $('ul#menuTab1 li a').click(function(){
+		  $('.button-collapse').sideNav('hide');
+	  });
+	  
+	  getImage();// get all images from database
+	  
+	  	// get search query from database
+		$('#search').keyup(function(){
+			search_str = $('#search').val();
+			//alert(search_str);
+			var ajaxurl = 'http://www.toursvision.com/bootstrap/getImage.php',
+			data = {'action': 'getImagesSearch', 'search': search_str};
+			$.post(ajaxurl, data).success(function (resp) {
+				//alert(resp);
+				if(resp.length > 0) {	// If got response with data, populate content area
+					//alert("Response = " + resp);
+						json = jQuery.parseJSON(resp); // converting response to a json obj			
+						var id = "";
+						var imgName= "";
+						var thumbURL = "";
+						var imageURL="";
+						var output ="";
+						
+						for(i in json){
+						 id = json[i].img_id;
+						 imgName= json[i].img_name;
+						 imageURL = json[i].img_source_url;
+							output += '<li class="col s6 m4 l3" data-src="'+imageURL+'"><a href="#"><img src="'+imageURL+'" alt="'+imgName+'" /></a></li>' ;
+							}
+							//alert(output);
+						$("#searchImages").html(output);
+						var gallery = $("#searchImages").lightGallery();
+					}
+			});
+
+		});
+	
+  });
+  
+  // gets data from database when clicked on category tabs
+  function getCategories(categ){
+		//alert("category = " + categ);
+		var category =  categ; 
+			var ajaxurl = 'http://www.toursvision.com/bootstrap/getImage.php',
+			data = {'action': 'catImagesSearch', 'category': category};
+			$.post(ajaxurl, data).success(function (resp) {
+				//alert("category response = " + resp);
+				if(resp.length > 0) {	// If got response with data, populate content area
+					//alert("Response = " + resp);
+						json = jQuery.parseJSON(resp); // converting response to a json obj			
+						var id = "";
+						var imgName= "";
+						var thumbURL = "";
+						var imageURL="";
+						var output ="";
+						
+						for(i in json){
+						 id = json[i].img_id;
+						 imgName= json[i].img_name;
+						 imageURL = json[i].img_source_url;
+							output += '<li class="col s6 m4 l3" data-src="'+imageURL+'"><a href="#"><img src="'+imageURL+'" alt="'+imgName+'" /></a></li>' ;
+							}
+							//alert(output);
+							$("#light-gallery").html(output);
+							$("#light-gallery").lightGallery();
+						
+					}
+			});
+		
+	}
+  
+</script>
+
+<script>
+
+var json;
+var TabNumb = 1;
+function getImage() {
+	//alert('in function');
+	var ajaxurl = 'http://www.toursvision.com/bootstrap/getImage.php',
+	data = {'action': 'getImages'};
+	$.ajax({
+    type: "POST",
+	data:data,
+    url: ajaxurl,
+    crossDomain : true,
+    xhrFields: {
+        withCredentials: false
+    }
+})
+    .done(function( data ) {
+       // alert(data);
+		if(data.length > 0) {	// If got response with data, populate content area
+			//alert("Response = " + resp);
+			json = jQuery.parseJSON(data); // converting response to a json obj			
+			var id = "";
+			var imgName= "";
+			var thumbURL = "";
+			var imageURL="";
+			var output ="";
+			
+						
+			for(i in json){
+				id = json[i].img_id;
+				imgName= json[i].img_name;
+				imageURL = json[i].img_source_url;
+				//TabNumb++;
+				output += '<li class="col s6 m4 l3" data-src="'+imageURL+'"><a href="#"><img src="'+imageURL+'" alt="'+imgName+'" /></a></li>' ;
+			}
+			$("#light-gallery").html(output);
+			$("#light-gallery").lightGallery();// initiallize light gallery
+		}
+    })
+}
+
+function getCat() {
+	//alert('in function');
+	var ajaxurl = 'http://www.toursvision.com/bootstrap/getImage.php',
+	data = {'action': 'getCat'};
+	$.ajax({
+    type: "POST",
+	data:data,
+    url: ajaxurl,
+    crossDomain : true,
+    xhrFields: {
+        withCredentials: false
+    }
+})
+    .done(function( data ) {
+        //alert(data);
+		if(data.length > 0) {	// If got response with data, populate content area
+			//alert("Response = " + resp);
+			json = jQuery.parseJSON(data); // converting response to a json obj			
+			var catName = "";
+			var catList = "";
+						
+			for(i in json){
+				TabNumb++;
+				catName = json[i].cat_name;
+				catList += '<li><a href="#tab-'+TabNumb+'" tab-id="'+TabNumb+'" ripple="ripple" ripple-color="#FFF">'+catName+'</a></li>';
+			}
+			$("#tabMenu").append(catList);
+			
+			// add remove .tabActive from tabs
+			$('#tabMenu li a').click(function(){
+				
+				var categ = $(this).text();
+				//alert(categ);
+				$('#tabMenu').find('li.tabActive').removeClass('tabActive');
+				$(this).parent().addClass('tabActive');
+				if(categ != "All"){
+					getCategories(categ);
+				}else{
+					getImage();
+				}
+				//getCategories(categ);
+			});
+			
+		}
+    })
+}
+getCat();
+</script>
+    </body>
+</html>
