@@ -64,5 +64,47 @@ ul{list-style: none outside none; padding-left: 0;}
 #lg-action a:hover, #lg-action a:focus {
     background-color: rgba(0, 0, 0, 0);
 }
+.pad2{padding: 2px !important;}
+.card .card-content {
+padding: 10px 0px;
+margin-left: 10px;
+margin-right: 10px;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   line-height: 20px;     /* fallback */
+   max-height: 70px;      /* fallback */
+   -webkit-line-clamp: 3; /* number of lines to show */
+   -webkit-box-orient: vertical;
+   border-radius: 0px 0px 0px 0px;
+}
+.card .card-action {
+    border-bottom: 1px solid rgba(160, 160, 160, 0.2);
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px 0px 4px 0px;
+}
+.card .card-action img{
+width:35px;
+height:35px;
+}
+.image-title{
+position: relative;
+width: 100%;
+height: auto;
+padding: 10px;
+text-transform: capitalize;
+color:#5B9AA7;
+}
+.card {
+    border-radius: 0px;
+}
+.card .card-image img {
+    border-radius: 0px 0px 0px 0px;
+}
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
+    margin-right: 7px;
+}
+
 
 

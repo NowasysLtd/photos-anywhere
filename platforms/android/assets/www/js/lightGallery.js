@@ -819,7 +819,7 @@
 		var filePath = cordova.file.externalRootDirectory + 'photos_anywhere/' + url.split('/').pop();
 		var fileTransfer = new window.FileTransfer();
 		var uri = encodeURI(decodeURIComponent(url));
-		//alert(filePath);
+		alert(filePath);
 		fileTransfer.download(uri,filePath,function(entry) {
 			swal({   title: "",   text: "Image is downloaded",   timer: 2000,   showConfirmButton: false });
 		},
