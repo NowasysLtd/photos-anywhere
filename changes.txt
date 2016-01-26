@@ -6,3 +6,11 @@ changes in photos anywhere:
 4: Login/ login with facebook
 5: RSS feeds intigration with other websites
 6: UI improvement
+7: tabs specific ui view
+8: change app name
+
+
+Admin section:
+1: develop insert image section
+2: develope edit category section
+3: able to view and delete images

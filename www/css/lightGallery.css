@@ -483,15 +483,15 @@ left: 0;
 	cursor: pointer;
 }
 #lg-gallery .thumb-cont .thumb-info .close i:after {
-	left: 6px;
+	left: 5px;
 	position: absolute;
-	top: 4px;
+	top: 1px;
 }
 #lg-gallery .thumb-cont .thumb-info .close i:after, #lg-close:after {
 	content: "\e01a";
 	font-family: 'Slide-icons';
 	font-style: normal;
-	font-size: 46px;
+	font-size: 18px;
 }
 #lg-gallery .thumb-cont .thumb-info .close:hover {
 	text-decoration: none;

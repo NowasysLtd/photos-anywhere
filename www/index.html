@@ -107,7 +107,6 @@
 // to download image from app to device
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady(){
-	var url = "http://www.phonegaptutorial.com/wp-content/uploads/examples/phonegap-logo.png";
 	window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function (dataEntry) {
 		dataEntry.getDirectory("photos_anywhere", {create: true });
 	});
@@ -144,6 +143,7 @@ $('#fav').click(function(){
 <script src="js/sweetalert.min.js"></script>
 <script>
 var search_str = "";
+var url = 'http://nowasys.com/photosanywhere/getImage.php';
   $(document).ready(function(){
 	  // sets side nav width to 300 and make it appear from left
 	  $('.button-collapse').sideNav({
@@ -163,7 +163,7 @@ var search_str = "";
 		$('#search').keyup(function(){
 			search_str = $('#search').val();
 			//alert(search_str);
-			var ajaxurl = 'http://nowasys.com/photosanywhere/getImage.php',
+			var ajaxurl = url,
 			data = {'action': 'getImagesSearch', 'search': search_str};
 			$.post(ajaxurl, data).success(function (resp) {
 				//alert(resp);
@@ -196,7 +196,7 @@ var search_str = "";
   function getCategories(categ){
 		//alert("category = " + categ);
 		var category =  categ; 
-			var ajaxurl = 'http://nowasys.com/photosanywhere/getImage.php',
+			var ajaxurl = url,
 			data = {'action': 'catImagesSearch', 'category': category};
 			$.post(ajaxurl, data).success(function (resp) {
 				//alert("category response = " + resp);
@@ -232,7 +232,7 @@ var json;
 var TabNumb = 1;
 function getImage() {
 	//alert('in function');
-	var ajaxurl = 'http://nowasys.com/photosanywhere/getImage.php',
+	var ajaxurl = url,
 	data = {'action': 'getImages'};
 	$.ajax({
     type: "POST",
@@ -270,7 +270,7 @@ function getImage() {
 
 function getCat() {
 	//alert('in function');
-	var ajaxurl = 'http://nowasys.com/photosanywhere/getImage.php',
+	var ajaxurl = url,
 	data = {'action': 'getCat'};
 	$.ajax({
     type: "POST",
