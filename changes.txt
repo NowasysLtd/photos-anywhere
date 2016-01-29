@@ -2,12 +2,17 @@ changes in photos anywhere:
 
 1: activate refresh button
 2: share with facebook
-3: In "Today" display cards
+3: In "Today" display cards -- done
 4: Login/ login with facebook
 5: RSS feeds intigration with other websites
 6: UI improvement
 7: tabs specific ui view
-8: change app name
+8: change app name -- done
+9: save image when click on favourite icon in "Today tab" -- done
+10: display delete icon instead download on "Favourite tab" -- done
+11: delete image from device when user clicks on delete icon -- done
+12: change share icon on today tab
+13: insert data
 
 
 Admin section:

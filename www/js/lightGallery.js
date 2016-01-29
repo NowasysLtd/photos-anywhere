@@ -5,9 +5,10 @@
 * Released under the MIT License - http://opensource.org/licenses/mit-license.html  ---- FREE ----
 
 =========================================================/**/
-;
+
 (function ($) {
     "use strict";
+	//var $tab = $('a.menuTab').hasClass('active').html();
     $.fn.lightGallery = function (options) {
         var defaults = {
                 mode: 'slide',
@@ -80,7 +81,7 @@
             $gallery, $galleryCont, $slider, $slide, $prev, $next, $download, $favrt, $del, prevIndex, $thumb_cont, $thumb, windowWidth, interval, usingThumb = false,
             aTiming = false,
             aSpeed = false;
-        var settings = $.extend(true, {}, defaults, options);
+        var settings = $.extend(true, {}, defaults, options);		
         var lightGallery = {
             init: function () {
                 el.each(function () {
@@ -533,10 +534,16 @@
             slideTo: function () {
                 var $this = this;
                 if (settings.controls === true && $children.length > 1) {
-                    $gallery.append('<div id="lg-action"><a id="lg-prev"></a><a id="download"></a><a id="lg-next"></a></div>');
+					alert($tabs);
+					if($tabs == "Favourite"){
+						 $gallery.append('<div id="lg-action"><a id="lg-prev"></a><a id="delete"></a><a id="lg-next"></a></div>');
+					}else if($tabs != "Favourite"){
+						$gallery.append('<div id="lg-action"><a id="lg-prev"></a><a id="download"></a><a id="lg-next"></a></div>');
+					}                  
                     $prev = $gallery.find('#lg-prev');
                     $next = $gallery.find('#lg-next');
 					$download = $gallery.find('#download');
+					$del = $gallery.find('#delete');
                     $prev.bind('click', function () {
                         $this.prevSlide();
                         clearInterval(interval);
@@ -553,10 +560,10 @@
 						//$this.onSlideFav(index);
 						//clearInterval(interval);
 					//});
-					//$del.bind('click', function() {
-						//$this.onSlideDel(index);
-						//clearInterval(interval);
-					//});					
+					$del.bind('click', function() {
+						$this.onSlideDel(index);
+						clearInterval(interval);
+					});					
                 }
             },
             autoStart: function () {
@@ -663,7 +670,8 @@
 				//var urlink = str.slice(42);
 				deleteImage(str);
 				plugin.destroy();
-				location.reload(true);
+				deviceImages();
+				//location.reload(true);
 			},			
             slide: function (index) {
                 var $this = this;
@@ -819,7 +827,7 @@
 		var filePath = cordova.file.externalRootDirectory + 'photos_anywhere/' + url.split('/').pop();
 		var fileTransfer = new window.FileTransfer();
 		var uri = encodeURI(decodeURIComponent(url));
-		alert(filePath);
+		//alert(filePath);
 		fileTransfer.download(uri,filePath,function(entry) {
 			swal({   title: "",   text: "Image is downloaded",   timer: 2000,   showConfirmButton: false });
 		},

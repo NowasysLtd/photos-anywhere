@@ -1,0 +1,7 @@
+1: copyright issue on googleplay
+2: display image thumbnails in app 
+2: change share icon on today tab
+3: insert data
+4: activate refresh button
+5: fix header and tabs menu
+

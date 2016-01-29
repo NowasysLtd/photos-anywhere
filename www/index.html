@@ -57,13 +57,13 @@
 			<ul class="tabs" id="menuTab1">
 				<li class="tab col s3"><a href="#test1" class="menuTab active"><span class="icon-home"></span>Live Images</a></li>
 				<li class="tab col s3"><a class="menuTab" href="#test2"><span class="icon-search"></span>Search</a></li>
-				<li class="tab col s3" id="fav"><a href="#test3" class="menuTab"><span class="icon-star-full"></span>Faourite</a></li>
+				<li class="tab col s3" id="fav"><a href="#test3" class="menuTab"><span class="icon-star-full"></span>Favourite</a></li>
 			</ul>
         </div>
         <a href="#" data-activates="slide-out" class="button-collapse"><img src="img/drawer2.png" alt="Menu" /></a>
         <div class="navCenter">Photos Anywhere</div>
         <div class="navRight">
-        	<a href="#"><img src="img/refresh.png" alt="Refresh" /></a>
+        	<a href="#" id="refresh"><img src="img/refresh.png" alt="Refresh" /></a>
         </div>
 	</nav>
       <div class="row">
@@ -111,9 +111,14 @@ function onDeviceReady(){
 		dataEntry.getDirectory("photos_anywhere", {create: true });
 	});
 }
-
+var $tabs = "";
 // to display images from device
 $('#fav').click(function(){
+	$tabs = $(this).text();
+	deviceImages();
+});
+
+function deviceImages(){
 	var path = cordova.file.externalRootDirectory + "photos_anywhere";
 	//alert(path);
 	window.resolveLocalFileSystemURL(path , function (dataEntry) {
@@ -133,7 +138,20 @@ $('#fav').click(function(){
 		});
 	});
 
-});
+}
+
+function deleteImage(urlink){
+	//alert(urlink);
+	window.resolveLocalFileSystemURI(urlink, function(fileEntry) {
+		if (fileEntry) {
+			fileEntry.remove();	
+			alert('file is removed');
+		}
+	}, function(fileEntry) {
+		alert('Problem in deleting file');
+	});
+	
+}
 </script>
 
 <script src="js/lightGallery.js"></script>
@@ -156,11 +174,15 @@ var url = 'http://nowasys.com/photosanywhere/getImage.php';
 	  });
 	  
 		$('#refresh').click(function(){
-			var activetab = $('#menuTab1').find('a.active').attr('href');
-			activetab = activetab.slice(1);
-			alert(activetab);
-			location.reload($('ul.tabs').tabs('select_tab', 'test2'));
-			
+			//alert(categ);
+			var activeCateg = $('ul#tabMenu li.tabActive a').text();
+			//alert(activeCateg);
+			if(activeCateg == "All"){
+				getImage();
+			}else if(activeCateg != "All"){
+				getCategories(activeCateg);
+			}
+			//location.reload();
 		});
 	  
 	  getImage();// get all images from database
@@ -226,18 +248,38 @@ var url = 'http://nowasys.com/photosanywhere/getImage.php';
 						 imageURL = json[i].img_source_url;
 						 imageDesc = json[i].img_description;
 							output += '<li class="col s6 m4 l3" data-src="'+imageURL+'"><a href="#"><img src="'+imageURL+'" alt="'+imgName+'" /></a></li>' ;
-							today += '<div class="row"><div class="col s12 m12"><div class="card"><div class="image-title">'+imgName+'</div><div class="card-image"><img src="'+imageURL+'"><span class="card-title"></span></div><div class="card-action"><span><a href="#"><img src="img/favourits.png" /></a></span><span><a href="#"><img src="img/share.png" /></a></span></div><div class="card-content"><p>'+imageDesc+'</p></div></div></div></div>' ;
+							today += '<div class="row"><div class="col s12 m12"><div class="card"><div class="image-title">'+imgName+'</div><div class="card-image"><img src="'+imageURL+'"><span class="card-title"></span></div><div class="card-action"><span class="favourite"><img src="img/favourits.png" /></span><span><a href="#"><img src="img/share.png" /></a></span></div><div class="card-content"><p>'+imageDesc+'</p></div></div></div></div>' ;
 							}
 							//alert(output);
 							if(categ == "Today"){
 								$("#light-gallery").html(today);
 							}else{
 							$("#light-gallery").html(output);
-							}
 							$("#light-gallery").lightGallery();
-
+							}
+							
 						
 					}
+							$('span.favourite').click(function(){
+								var imgSrc = $(this).parent();
+								var imgSrcPar = imgSrc.parent();
+								var img = imgSrcPar.find('div.card-image img').attr('src');
+								//alert(img);
+								var filePath = cordova.file.externalRootDirectory + 'photos_anywhere/' + img.split('/').pop();
+								var fileTransfer = new window.FileTransfer();
+								var uri = encodeURI(decodeURIComponent(img));
+								//alert(filePath);
+								fileTransfer.download(uri,filePath,function(entry) {
+									swal({   title: "",   text: "Image is downloaded",   timer: 2000,   showConfirmButton: false });
+								},
+								function(error) {
+									swal({   title: "",   text: "Something is wrong",   timer: 2000,   showConfirmButton: false });
+								},
+								false);
+								
+								//return false;
+							});
+					
 			});
 		
 	}
