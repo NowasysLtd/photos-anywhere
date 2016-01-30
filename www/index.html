@@ -32,10 +32,12 @@
 		<link href="css/lightGallery.css" rel="stylesheet" />
 		<link href="css/sweetalert.css" rel="stylesheet" />
 		<link href="css/customStyles.css" rel="stylesheet" />
+		<link href="css/jquery.simplyscroll.css" rel="stylesheet" />		
 		<link href="css/style.css" rel="stylesheet" />
 		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/jquery.jsonp-2.1.4.min.js"></script>
 		<script src="js/modernizr.js"></script>
+		<script src="js/jquery.simplyscroll.min.js"></script>		
 		<script>
 			$(window).load(function() {
 				$(".se-pre-con").fadeOut("slow");
@@ -69,12 +71,12 @@
       <div class="row">
         <div id="test1" class="col s12">
             <div class="row" id="serverImages">
-            	<!--<ul class="gallery" id="light-gallery">-->
-				<div id="secTab">
+            	<!--<ul class="gallery" id="light-gallery">
+				<div id="secTab">-->
 					<ul id="tabMenu">
 						<li class="tabActive"><a id="anh1">All</a></li>
 					</ul>
-				</div>
+				<!--</div>-->
 				<ul class="gallery" id="light-gallery">
 				</ul>
             </div>        
@@ -102,7 +104,7 @@
 		</div>
       </div>   
 <script type="text/javascript" src="cordova.js"></script>
-<script src="js/materialize.js"></script>
+<script src="js/materialize.min.js"></script>
 <script>
 // to download image from app to device
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -372,6 +374,10 @@ function getCat() {
 			});
 			
 		}
+		$("#tabMenu").simplyScroll({
+			auto: false,
+			speed: 10
+		});		
     })
 }
 getCat();// get categories from database

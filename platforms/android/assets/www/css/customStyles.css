@@ -21,7 +21,7 @@ nav .button-collapse { margin-left: 10px;}
 .z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav { box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.16), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);}
 nav { background-color: rgb(130, 199, 213); position: fixed; z-index: 999;}
 #test1{position: relative; top: 97px;}
-#test2, #test3{position: relative; top: 64px;}
+#test2, #test3{position: relative; top: 56px;}
 nav .button-collapse { float: left; position: absolute; left: 12px; height: 56px;}
 .navCenter{ position: relative; width: 100%; text-align: center; color: #fff; font-family: gothic; font-size: 18px; font-weight: 700; letter-spacing: 1px;}
 .navRight{ position: absolute; z-index: 3333; top: 8px; right: 12px; }
@@ -34,17 +34,17 @@ nav .button-collapse { float: left; position: absolute; left: 12px; height: 56px
 .navActive{ color:#fd8a00 !important; border-bottom:1px solid #fd8a00 !important;}
 .card-panel { padding: 2px; margin: 2px 2px; border-radius: 0px; height: 111px !important; overflow: hidden !important;}
 .card-panel img { width:100%;}
-#searchImages li, #light-gallery li, #favImages li, #carsImg li, #hollywoodImg li{ padding:4px 2px; height:119px; overflow:hidden;} 
-#light-gallery li a img, #searchImages li a img, #favImages li a img, #carsImg li a img, #hollywoodImg li a img{ width:100%;}
+#searchImages li, #light-gallery li, #natureImg li, #carsImg li, #hollywoodImg li{ padding:4px 2px; height:119px; overflow:hidden;} 
+#light-gallery li a img, #searchImages li a img, #natureImg li a img, #carsImg li a img, #hollywoodImg li a img{ width:100%;}
 @media(min-width: 319px) and (max-width: 321px){
-	#light-gallery li, #searchImages li, #favImages li, #carsImg li, #hollywoodImg li{ height:98px; overflow:hidden;}
+	#light-gallery li, #searchImages li, #natureImg li, #carsImg li, #hollywoodImg li{ height:98px; overflow:hidden;}
 }
 @media(min-width: 359px) and (max-width: 361px){
-	#light-gallery li, #searchImages li, #favImages li, #carsImg li, #hollywoodImg li{ height:108px; overflow:hidden;}
+	#light-gallery li, #searchImages li, #natureImg li, #carsImg li, #hollywoodImg li{ height:108px; overflow:hidden;}
 }
 @media(min-width: 767px){
 	.card-panel{ height:140px !important;}
-	#light-gallery li, #searchImages li, #favImages li, #carsImg li, #hollywoodImg li{ height:140px; overflow:hidden;}
+	#light-gallery li, #searchImages li, #natureImg li, #carsImg li, #hollywoodImg li{ height:140px; overflow:hidden;}
 }
 .no-js #loader { display: none;  }
 .js #loader { display: block; position: absolute; left: 100px; top: 0; }
@@ -58,10 +58,12 @@ ul{list-style: none outside none; padding-left: 0;}
 .tabs .tab { line-height: 90px; height: 90px;}
 #lg-prev{ position: absolute !important; left: 5px !important; top: 0px !important; right: auto !important; bottom: auto !important;}
 #lg-next{ position: absolute !important; top: 0px !important; right: 5px !important; bottom: auto !important; left: auto !important;}
-#secTab{ position: fixed; background: #00acc1; overflow: auto; top: 64px;}
-#tabMenu{ margin: 0px; width: 3000px;}
+#secTab{ position: fixed; background: #00acc1; overflow: auto; top: 56px;}
+/*#tabMenu{ margin: 0px; width: 3000px;}
 #tabMenu li { float: left;}
-#tabMenu li a { display: block; box-sizing: border-box; padding: 10px 20px 7px; color: #fff; font-weight: 500; text-decoration: none; text-transform: uppercase;    cursor: pointer;}
+#tabMenu li a { display: block; box-sizing: border-box; padding: 10px 20px 7px; color: #fff; font-weight: 500; text-decoration: none; text-transform: uppercase;    cursor: pointer;}*/
+#tabMenu li { float: left !impotant;}
+#tabMenu li a{ color: #fff; padding: 10px 20px 7px !important; font-weight: 500; text-transform: uppercase; font-size: 16px; line-height: 41px;}
 .tabActive{ background-color: rgba(0 ,0, 0, 0.1); border-bottom:2px solid red;}
 .mb0{ margin-bottom:0px !important;}
 #lg-action a:hover, #lg-action a:focus {
@@ -109,4 +111,10 @@ color:#5B9AA7;
     margin-right: 7px;
 }
 .shareIcon img{margin-left:5px;}
+@media only screen and (min-width: 601px){
+	nav {
+    height: 56px;
+    line-height: 56px;
+}
+}
 
