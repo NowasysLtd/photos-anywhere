@@ -13,6 +13,8 @@ changes in photos anywhere:
 11: delete image from device when user clicks on delete icon -- done
 12: change share icon on today tab
 13: insert data
+14: show total images
+15: web view
 
 
 Admin section:

@@ -147,7 +147,7 @@ function deleteImage(urlink){
 	window.resolveLocalFileSystemURI(urlink, function(fileEntry) {
 		if (fileEntry) {
 			fileEntry.remove();	
-			alert('file is removed');
+			//alert('file is removed');
 		}
 	}, function(fileEntry) {
 		alert('Problem in deleting file');
@@ -292,10 +292,17 @@ var url = 'http://nowasys.com/photosanywhere/getImage.php';
 
 var json;
 var TabNumb = 1;
+var startImages;
 function getImage() {
-	//alert('in function');
+	//alert($(window).width());
+	if(($(window).width() >= 319) && ($(window).width() <= 600)){
+		startImages = 10;
+	}else if($(window).width() >= 601){
+		startImages = 21;
+	}
+	//alert(startImages);
 	var ajaxurl = url,
-	data = {'action': 'getImages'};
+	data = {'action': 'getImages', 'startImages': startImages};
 	$.ajax({
     type: "POST",
 	data:data,
@@ -322,11 +329,25 @@ function getImage() {
 				imgName= json[i].img_name;
 				imageURL = json[i].img_source_url;
 				//TabNumb++;
-				output += '<li class="col s6 m4 l3" data-src="'+imageURL+'"><a href="#"><img src="'+imageURL+'" alt="'+imgName+'" /></a></li>' ;
+				output += '<li class="col s6 m4 l3" id="'+id+'" data-src="'+imageURL+'"><a href="#"><img src="'+imageURL+'" alt="'+imgName+'" /></a></li>' ;
 			}
 			$("#light-gallery").html(output);
 			$("#light-gallery").lightGallery();// initiallize light gallery
+			
 		}
+		
+		$(document).scroll(function(e){
+
+			if ($(window).scrollTop() >= ($(document).height() - $(window).height())){
+				var lastId = $('#light-gallery li:last-child').attr('id');
+				//alert(lastId);
+				if(lastId != 1){
+					getMoreImages(lastId);
+				}
+			}
+		});	
+			//alert($('#light-gallery li').length);
+		
     })
 }
 
@@ -381,6 +402,44 @@ function getCat() {
     })
 }
 getCat();// get categories from database
+
+  function getMoreImages(lastId){
+		//alert("last id = " + lastId);
+		var nextImages = "";
+		if(($(window).width() >= 319) && ($(window).width() <= 600)){
+			nextImages = 8;
+		}else if($(window).width() >= 601){
+			nextImages = 9;
+		}	
+		//alert(nextImages);
+			var ajaxurl = url,
+			data = {'action': 'getMoreImages', 'lastId': lastId, 'nextImages': nextImages};
+			$.post(ajaxurl, data).success(function (resp) {
+				//alert("category response = " + resp);
+				if(resp.length > 0) {	// If got response with data, populate content area
+					//alert("Response = " + resp);
+					json = jQuery.parseJSON(resp); // converting response to a json obj			
+					var id = "";
+					var imgName= "";
+					var thumbURL = "";
+					var imageURL="";
+					var output ="";
+					
+								
+					for(i in json){
+						id = json[i].img_id;
+						imgName= json[i].img_name;
+						imageURL = json[i].img_source_url;
+						//TabNumb++;
+						output += '<li class="col s6 m4 l3" id="'+id+'" data-src="'+imageURL+'"><a href="#"><img src="'+imageURL+'" alt="'+imgName+'" /></a></li>' ;
+					}
+					$("#light-gallery").append(output);
+					$("#light-gallery").lightGallery();// initiallize light gallery
+				}
+			});
+		
+	}
+
 </script>
     </body>
 </html>

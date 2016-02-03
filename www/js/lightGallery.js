@@ -534,7 +534,7 @@
             slideTo: function () {
                 var $this = this;
                 if (settings.controls === true && $children.length > 1) {
-					alert($tabs);
+					//alert($tabs);
 					if($tabs == "Favourite"){
 						 $gallery.append('<div id="lg-action"><a id="lg-prev"></a><a id="delete"></a><a id="lg-next"></a></div>');
 					}else if($tabs != "Favourite"){

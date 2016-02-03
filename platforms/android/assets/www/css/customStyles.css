@@ -34,17 +34,17 @@ nav .button-collapse { float: left; position: absolute; left: 12px; height: 56px
 .navActive{ color:#fd8a00 !important; border-bottom:1px solid #fd8a00 !important;}
 .card-panel { padding: 2px; margin: 2px 2px; border-radius: 0px; height: 111px !important; overflow: hidden !important;}
 .card-panel img { width:100%;}
-#searchImages li, #light-gallery li, #natureImg li, #carsImg li, #hollywoodImg li{ padding:4px 2px; height:119px; overflow:hidden;} 
-#light-gallery li a img, #searchImages li a img, #natureImg li a img, #carsImg li a img, #hollywoodImg li a img{ width:100%;}
+#searchImages li, #light-gallery li, #favImages li, #carsImg li, #hollywoodImg li{ padding:4px 2px; height:119px; overflow:hidden;} 
+#light-gallery li a img, #searchImages li a img, #favImages li a img, #carsImg li a img, #hollywoodImg li a img{ width:100%;}
 @media(min-width: 319px) and (max-width: 321px){
-	#light-gallery li, #searchImages li, #natureImg li, #carsImg li, #hollywoodImg li{ height:98px; overflow:hidden;}
+	#light-gallery li, #searchImages li, #favImages li, #carsImg li, #hollywoodImg li{ height:98px; overflow:hidden;}
 }
 @media(min-width: 359px) and (max-width: 361px){
-	#light-gallery li, #searchImages li, #natureImg li, #carsImg li, #hollywoodImg li{ height:108px; overflow:hidden;}
+	#light-gallery li, #searchImages li, #favImages li, #carsImg li, #hollywoodImg li{ height:108px; overflow:hidden;}
 }
 @media(min-width: 767px){
 	.card-panel{ height:140px !important;}
-	#light-gallery li, #searchImages li, #natureImg li, #carsImg li, #hollywoodImg li{ height:140px; overflow:hidden;}
+	#light-gallery li, #searchImages li, #favImages li, #carsImg li, #hollywoodImg li{ height:140px; overflow:hidden;}
 }
 .no-js #loader { display: none;  }
 .js #loader { display: block; position: absolute; left: 100px; top: 0; }
