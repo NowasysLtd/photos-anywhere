@@ -161,6 +161,7 @@ function deleteImage(urlink){
 <script>
 var search_str = "";
 var url = 'http://nowasys.com/photosanywhere/getImage.php';
+var imageBaseURL = 'http://nowasys.com/photosanywhere/images/';
 
   $(document).ready(function(){
 	  // sets side nav width to 300 and make it appear from left
@@ -206,13 +207,17 @@ var url = 'http://nowasys.com/photosanywhere/getImage.php';
 						var imgName= "";
 						var thumbURL = "";
 						var imageURL="";
+						var imageThumbURL="";
 						var output ="";
 						
 						for(i in json){
 						 id = json[i].img_id;
 						 imgName= json[i].img_name;
-						 imageURL = json[i].img_source_url;
-							output += '<li class="col s6 m4 l3" data-src="'+imageURL+'"><a href="#"><img src="'+imageURL+'" alt="'+imgName+'" /></a></li>' ;
+						 imageURL = json[i].photo_url;
+						 imageThumbURL = json[i].photo_thumb_url;
+						 imageURL = imageBaseURL + imageURL;
+						 imageThumbURL = imageBaseURL + imageThumbURL;
+								output += '<li class="col s6 m4 l3" data-src="'+imageURL+'"><a href="#"><img src="'+imageThumbURL+'" alt="'+imgName+'" /></a></li>' ;
 							}
 							//alert(output);
 						$("#searchImages").html(output);
@@ -240,6 +245,7 @@ var url = 'http://nowasys.com/photosanywhere/getImage.php';
 						var imgName= "";
 						var thumbURL = "";
 						var imageURL= "";
+						var imageThumbURL= "";
 						var imageDesc = "";
 						var output ="";
 						var today ="";
@@ -247,9 +253,12 @@ var url = 'http://nowasys.com/photosanywhere/getImage.php';
 						for(i in json){
 						 id = json[i].img_id;
 						 imgName= json[i].img_name;
-						 imageURL = json[i].img_source_url;
 						 imageDesc = json[i].img_description;
-							output += '<li class="col s6 m4 l3" data-src="'+imageURL+'"><a href="#"><img src="'+imageURL+'" alt="'+imgName+'" /></a></li>' ;
+						 imageURL = json[i].photo_url;
+						 imageThumbURL = json[i].photo_thumb_url;
+						 imageURL = imageBaseURL + imageURL;
+						 imageThumbURL = imageBaseURL + imageThumbURL;
+							output += '<li class="col s6 m4 l3" data-src="'+imageURL+'"><a href="#"><img src="'+imageThumbURL+'" alt="'+imgName+'" /></a></li>' ;
 							today += '<div class="row"><div class="col s12 m12"><div class="card"><div class="image-title">'+imgName+'</div><div class="card-image"><img src="'+imageURL+'"><span class="card-title"></span></div><div class="card-action"><span class="favourite"><img src="img/favourits.png" /></span><span><a href="#"><img src="img/share.png" /></a></span></div><div class="card-content"><p>'+imageDesc+'</p></div></div></div></div>' ;
 							}
 							//alert(output);
@@ -321,15 +330,19 @@ function getImage() {
 			var imgName= "";
 			var thumbURL = "";
 			var imageURL="";
+			var imageThumbURL="";
 			var output ="";
 			
 						
 			for(i in json){
 				id = json[i].img_id;
 				imgName= json[i].img_name;
-				imageURL = json[i].img_source_url;
+				imageURL = json[i].photo_url;
+				imageThumbURL = json[i].photo_thumb_url;
+				imageThumbURL = imageBaseURL + imageThumbURL;
+				imageURL = imageBaseURL + imageURL;
 				//TabNumb++;
-				output += '<li class="col s6 m4 l3" id="'+id+'" data-src="'+imageURL+'"><a href="#"><img src="'+imageURL+'" alt="'+imgName+'" /></a></li>' ;
+				output += '<li class="col s6 m4 l3" id="'+id+'" data-src="'+imageURL+'"><a href="#"><img src="'+imageThumbURL+'" alt="'+imgName+'" /></a></li>' ;
 			}
 			$("#light-gallery").html(output);
 			$("#light-gallery").lightGallery();// initiallize light gallery
@@ -421,7 +434,7 @@ getCat();// get categories from database
 					json = jQuery.parseJSON(resp); // converting response to a json obj			
 					var id = "";
 					var imgName= "";
-					var thumbURL = "";
+					var imageThumbURL = "";
 					var imageURL="";
 					var output ="";
 					
@@ -429,9 +442,12 @@ getCat();// get categories from database
 					for(i in json){
 						id = json[i].img_id;
 						imgName= json[i].img_name;
-						imageURL = json[i].img_source_url;
+						 imageURL = json[i].photo_url;
+						 imageThumbURL = json[i].photo_thumb_url;
+						 imageURL = imageBaseURL + imageURL;
+						 imageThumbURL = imageBaseURL + imageThumbURL;
 						//TabNumb++;
-						output += '<li class="col s6 m4 l3" id="'+id+'" data-src="'+imageURL+'"><a href="#"><img src="'+imageURL+'" alt="'+imgName+'" /></a></li>' ;
+						output += '<li class="col s6 m4 l3" id="'+id+'" data-src="'+imageURL+'"><a href="#"><img src="'+imageThumbURL+'" alt="'+imgName+'" /></a></li>' ;
 					}
 					$("#light-gallery").append(output);
 					$("#light-gallery").lightGallery();// initiallize light gallery
